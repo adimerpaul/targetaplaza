@@ -22,4 +22,10 @@ class Cliente extends Model
     ];
     protected $table='cliente';
     public $timestamps=false;
+    public function recargas(){
+        return $this->hasMany(Recarga::class);
+    }
+    public function historials(){
+        return $this->hasMany(Historial::class);
+    }
 }

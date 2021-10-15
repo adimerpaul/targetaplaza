@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use App\Models\Historial;
 use App\Models\Recarga;
 use Illuminate\Http\Request;
@@ -46,9 +47,10 @@ class HistorialController extends Controller
      * @param  \App\Models\Historial  $historial
      * @return \Illuminate\Http\Response
      */
-    public function show(Historial $historial)
+    public function show($ci)
     {
-        //
+//        return $ci;
+        return Cliente::where('ci',$ci)->with('historials')->with('recargas')->get();
     }
 
     /**
