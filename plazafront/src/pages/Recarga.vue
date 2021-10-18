@@ -129,7 +129,7 @@ export default {
   methods:{
     guardarrecarga(){
       this.$q.loading.show()
-      this.$axios.put(process.env.API+'/cliente/'+this.cliente.id,{monto:this.recarga}).then(res=>{
+      this.$axios.put(process.env.API+'/cliente/'+this.cliente.id,{cliente_id:this.cliente.id,monto:this.recarga}).then(res=>{
         this.misdatos()
         this.boolrecarga=false
         // this.cliente={}

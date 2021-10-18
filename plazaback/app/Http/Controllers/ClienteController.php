@@ -91,7 +91,7 @@ class ClienteController extends Controller
         $recarga->fecha=date('Y-m-d');
         $recarga->hora=date('H:i:s');
         $recarga->monto=$request->monto;
-        $recarga->cliente_id=188;
+        $recarga->cliente_id=$request->cliente_id;
         $recarga->user_id=$request->user()->id;
         $recarga->save();
 
