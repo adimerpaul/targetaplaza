@@ -6,6 +6,7 @@ use App\Models\Cliente;
 use App\Models\Historial;
 use App\Models\Recarga;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HistorialController extends Controller
 {
@@ -18,6 +19,32 @@ class HistorialController extends Controller
     {
         return Historial::with('cliente')->get();
 
+    }
+
+    public function fhistorial(Request $request){
+        return Historial::with('cliente')->whereDate('fecha',$request->fecha)->get();
+    }
+
+    public function imprimir(Request $request){
+        $rep=DB::SELECT('select lugar,count(*) as cantidad,sum(monto) as total from historial where date(fecha)="'.$request->fecha.'" GROUP BY lugar');
+        $cadena="
+        <div>Fecha:$request->fecha</div>
+        <div>
+        <table>
+        <thead><tr><th>LUGAR</th><th>CANTIDAD</th><th>TOTAL</th></tr></thead>
+        <tbody>
+        ";
+        foreach ($rep as $row) {
+
+            $cadena.="<tr><td>$row->lugar</td><td>$row->cantidad</td><td>$row->total</td></tr>";
+        }
+        $cadena.="</tbody>
+        </table>
+
+        </div>
+
+        ";
+        return $cadena;
     }
 
     /**
