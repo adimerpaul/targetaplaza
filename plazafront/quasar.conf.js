@@ -73,7 +73,7 @@ module.exports = configure(function (ctx) {
       env: {
         API: ctx.dev
           ? 'http://localhost:8000/api'
-          : 'https://back.tarjetaplaza.ml/api'
+          : 'http://10.200.100.19:86/api'
       }
     },
 
