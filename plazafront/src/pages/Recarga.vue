@@ -60,6 +60,11 @@
                   {{ props.row.saldo }}
 <!--                </q-badge>-->
               </q-td>
+              <q-td key="estado" :props="props">
+                               <q-badge :color="props.row.estado=='ACTIVO'?'green':'red'" @click="cambioEstado(props.row)">
+                                  {{ props.row.estado }}
+                                </q-badge>
+                              </q-td>
               <q-td key="codigo" :props="props">
 <!--                <q-badge color="amber">-->
                   {{ props.row.codigo }}
@@ -112,6 +117,7 @@ export default {
         {label:'celular',name:'celular',field:'celular',align:'center'},
         // {label:'foto',name:'foto',field:'foto',align:'center'},
         {label:'saldo',name:'saldo',field:'saldo',align:'center'},
+        {label:'estado',name:'estado',field:'estado',align:'center'},
         {label:'codigo',name:'codigo',field:'codigo',align:'center'},
         {label:'recargar',name:'recargar',field:'recargar',align:'center'},
         // {label:'fecha',name:'fecha',field:'fecha',align:'center'},
@@ -127,6 +133,12 @@ export default {
     this.misdatos()
   },
   methods:{
+    cambioEstado(cliente){
+      this.$axios.post(process.env.API+'/clienteEstado',cliente).then(res=>{
+        this.misdatos();
+      })
+
+    },
     guardarrecarga(){
       this.$q.loading.show()
       this.$axios.put(process.env.API+'/cliente/'+this.cliente.id,{cliente_id:this.cliente.id,monto:this.recarga}).then(res=>{

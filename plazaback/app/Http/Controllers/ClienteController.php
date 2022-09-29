@@ -134,4 +134,13 @@ return $text;
     {
         $cliente->delete();
     }
+
+    public function clienteEstado(Request $request){
+        $cliente=Cliente::find($request->id);
+        if($cliente->estado=='ACTIVO')
+            $cliente->estado='INACTIVO';
+        else
+            $cliente->estado='ACTIVO';
+        $cliente->save();
+    }
 }

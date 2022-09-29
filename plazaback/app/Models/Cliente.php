@@ -19,6 +19,7 @@ class Cliente extends Model
         'saldo',
         'codigo',
         'fecha',
+        'estado',
     ];
     protected $table='cliente';
     public $timestamps=false;
