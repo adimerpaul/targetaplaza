@@ -46,7 +46,7 @@ class ClienteController extends Controller
         $cliente->direccion = $request->direccion;
         $cliente->celular = $request->celular;
         $cliente->foto = '';
-        $cliente->saldo = 0;
+        $cliente->saldo = $request->saldo;
         $cliente->codigo = $request->codigo;
         $cliente->fecha = date('Y-m-d');
         $cliente->save();

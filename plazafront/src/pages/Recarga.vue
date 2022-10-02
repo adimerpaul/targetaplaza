@@ -4,11 +4,12 @@
       <div class="col-12">
         <q-form @submit.prevent="crear()">
           <div class="row">
-            <div class="col-2"><q-input autofocus label="ci" v-model="dato.ci" dense outlined required/></div>
+            <div class="col-1"><q-input autofocus label="ci" v-model="dato.ci" dense outlined required/></div>
             <div class="col-2"><q-input label="nombre" v-model="dato.nombre" dense outlined required/></div>
             <div class="col-2"><q-input label="apellido" v-model="dato.apellido" dense outlined required/></div>
             <div class="col-2"><q-input type="date" label="fechanac" v-model="dato.fechanac" dense outlined required/></div>
             <div class="col-1"><q-input label="celular" v-model="dato.celular" dense outlined required/></div>
+            <div class="col-1"><q-input label="Saldo" v-model="dato.saldo" type="number" step="0.01" dense outlined required/></div>
             <div class="col-2"><q-input label="codigo" v-model="dato.codigo" dense outlined required/></div>
             <div class="col-1 flex flex-center">
               <q-btn size="xs" label="crear" color="primary" type="submit" icon="send"/>
@@ -167,6 +168,9 @@ export default {
       })
     },
     crear(){
+      if(this.dato.saldo<=0 || this.dato.saldo==undefined){
+        return false
+      }
       this.$q.loading.show()
       this.$axios.post(process.env.API+'/cliente',this.dato).then(res=>{
         this.misdatos()
