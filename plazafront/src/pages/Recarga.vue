@@ -135,9 +135,11 @@ export default {
   },
   methods:{
     cambioEstado(cliente){
+      if(this.$store.state.login.boolusuarios){
       this.$axios.post(process.env.API+'/clienteEstado',cliente).then(res=>{
         this.misdatos();
       })
+    }
 
     },
     guardarrecarga(){
@@ -174,6 +176,7 @@ export default {
       this.$q.loading.show()
       this.$axios.post(process.env.API+'/cliente',this.dato).then(res=>{
         this.misdatos()
+        this.dato={fechanac:date.formatDate(Date.now(),'YYYY-MM-DD')}
         this.cliente={}
         // console.log(res.data)
       }).catch(err=>{
