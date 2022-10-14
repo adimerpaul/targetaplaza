@@ -72,7 +72,7 @@
 <!--                </q-badge>-->
               </q-td>
               <q-td>
-                <q-btn size="xs" @click="showrecarga(props.row)" label="Recargar" icon="payment" color="primary"/>
+                <q-btn size="xs" @click="showrecarga(props.row)" label="Recargar" icon="payment" color="primary" v-if="props.row.estado=='ACTIVO'"/>
               </q-td>
             </q-tr>
           </template>
