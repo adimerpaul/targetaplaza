@@ -48,7 +48,9 @@ export default {
   },
   mounted() {
       //  $('#example').DataTable().destroy()
-          $('#example').DataTable( )
+          $('#example').DataTable( {                      dom: 'Blfrtip',
+            // pageLength: 5,
+             lengthMenu: [[20, 50, 100, -1], [20, 50, 100, "All"]],})
     this.misdatos()
          // $('#example').DataTable( )
   },
