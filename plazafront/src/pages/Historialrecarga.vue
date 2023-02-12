@@ -49,7 +49,7 @@ export default {
   mounted() {
       //  $('#example').DataTable().destroy()
     this.misdatos()
-          $('#example').DataTable( )
+         // $('#example').DataTable( )
   },
   methods:{
     misdatos(){
