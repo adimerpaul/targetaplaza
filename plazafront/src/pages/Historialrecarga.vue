@@ -9,7 +9,7 @@
         <th>HORA</th>
         <th>MONTO</th>
         <th>CLIENTE</th>
-        
+        <th>USUARIO</th>
 
       </tr>
       </thead>
@@ -20,7 +20,7 @@
         <td>{{fila.hora}}</td>
         <td>{{fila.monto}}</td>
         <td>{{fila.cliente.nombre}} {{fila.cliente.apellido}}</td>
-        
+        <td>{{fila.usuario}}</td>
       </tr>
       </tbody>
     </table>
@@ -57,11 +57,17 @@ export default {
   },
   methods:{
     misdatos(){
+      this.filas=[]
       this.$q.loading.show()
       this.$axios.get(process.env.API+'/recarga').then( res=>{
-        console.log(res.data);
-        this.filas = res.data;
-        $('#example').DataTable().destroy();
+        //console.log(res.data);
+        res.data.forEach(r => {
+        //console.log(r.user.name)
+          r.usuario=r.user.name
+          this.filas.push(r)
+        })
+        //this.filas = res.data
+        $('#example').DataTable().destroy()
         this.$nextTick(()=>{
           $('#example').DataTable( {
             dom: 'Bfrtip',
@@ -72,8 +78,11 @@ export default {
           this.$q.loading.hide();
         })
       }).catch(err=>{
+        this.$q.loading.hide();
+
         this.$q.notify({
-          message:err.response.data.message,
+          
+          message:err.message,
           color:'red',
           icon:'error'
         })
