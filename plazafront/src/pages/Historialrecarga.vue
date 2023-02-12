@@ -59,7 +59,7 @@ export default {
     misdatos(){
       this.$q.loading.show()
       this.$axios.get(process.env.API+'/recarga').then( res=>{
-        // console.log(res.data);
+        console.log(res.data);
         this.filas = res.data;
         $('#example').DataTable().destroy();
         this.$nextTick(()=>{
