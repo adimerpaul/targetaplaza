@@ -9,7 +9,7 @@
         <th>HORA</th>
         <th>MONTO</th>
         <th>CLIENTE</th>
-        <th>USUARIO</th>
+        
 
       </tr>
       </thead>
@@ -20,7 +20,7 @@
         <td>{{fila.hora}}</td>
         <td>{{fila.monto}}</td>
         <td>{{fila.cliente.nombre}} {{fila.cliente.apellido}}</td>
-        <td>{{fila.user.name}}</td>
+        
       </tr>
       </tbody>
     </table>
