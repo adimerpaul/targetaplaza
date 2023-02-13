@@ -1,24 +1,6 @@
 <template>
 <q-page class="q-pa-xs">
-  <div class="col-12">
-    <q-table
-      title="HISTORIAL DE RECARGAS"
-      :rows="filas"
-      :columns="columns"
-      row-key="name"
-      :filter="filter"
-    >
-    <template v-slot:top-right>
-                          <q-input dense outlined debounce="300" v-model="filter" placeholder="Buscar">
-                <template v-slot:append>
-                  <q-icon name="search" />
-                </template>
-              </q-input>
-             <q-btn color="deep-purple-6" label="Exportar Excel"  @click="exportTable"/>
-
-            </template>
-    </q-table>
-  <!--<div class=" responsive">
+  <div class=" responsive">
     <table id="example" class="display" style="width:100%">
       <thead>
       <tr>
@@ -41,7 +23,7 @@
         <td>{{fila.usuario}}</td>
       </tr>
       </tbody>
-    </table>-->
+    </table>
   </div>
 </q-page>
 </template>
@@ -58,59 +40,22 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs=pdfFonts.pdfMake.vfs;
 window.JSZip=jszip;
-import xlsx from "json-as-xlsx"
-
 export default {
   data(){
     return{
       filas:[],
-      filter:'',
-      columns:[
-        {name:'num',field:'num',label:'No',sortable:true},
-        {name:'fecha',field:'fecha',label:'FECHA',sortable:true},
-        {name:'hora',field:'hora',label:'HORA',sortable:true},
-        {name:'monto',field:'monto',label:'MONTO',sortable:true},
-        {name:'cliente',field:'nombre',label:'CLIENTE',sortable:true},
-        {name:'usuario',field:'usuario',label:'USUARIO',sortable:true}
-      ]
     }
   },
   mounted() {
     this.misdatos()
-    /*$('#example').DataTable( {
+    $('#example').DataTable( {
       dom: 'Bfrtip',
       buttons: [
         'copy', 'csv', 'excel', 'pdf', 'print'
       ]
-    } );*/
+    } );
   },
   methods:{
-    exportTable () {
-let datacaja = [
-  {
-    sheet: "Recargas",
-    columns: [
-      { label: "No", value: "num" }, // Top level data
-      { label: "Fecha", value: "monto" }, // Top level data
-      { label: "Hora", value: "hora" }, // Top level data
-      { label: "Monto", value: "monto" }, // Top level data
-      { label: "Cliente", value: "nombre" }, // Top level data
-      { label: "Usuario", value: "usuario" }, // Top level data
-    ],
-    content: this.filas
-  },
-
-]
-
-let settings = {
-  fileName: "HistRecarga", // Name of the resulting spreadsheet
-  extraLength: 5, // A bigger number means that columns will be wider
-  writeOptions: {}, // Style options from https://github.com/SheetJS/sheetjs#writing-options
-}
-
-xlsx(datacaja, settings) // Will download the excel file
-      },
-
     misdatos(){
       this.$q.loading.show()
       this.filas=[]
@@ -124,9 +69,8 @@ xlsx(datacaja, settings) // Will download the excel file
             r.nombre=r.cliente.nombre +' ' + r.cliente.apellido
             this.filas.push(r)
         });
-        this.$q.loading.hide();
-
-       /* $('#example').DataTable().destroy();
+        
+        $('#example').DataTable().destroy();
         this.$nextTick(()=>{
           $('#example').DataTable( {
             dom: 'Bfrtip',
@@ -135,7 +79,7 @@ xlsx(datacaja, settings) // Will download the excel file
             ]
           } );
           this.$q.loading.hide();
-        })*/
+        })
       }).catch(err=>{
           this.$q.loading.hide();
         this.$q.notify({
