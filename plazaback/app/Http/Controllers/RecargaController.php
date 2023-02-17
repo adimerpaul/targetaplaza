@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Recarga;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RecargaController extends Controller
 {
@@ -15,6 +16,11 @@ class RecargaController extends Controller
     public function index()
     {
         return Recarga::with('user')->with('cliente')->get();
+    }
+
+    public function listRecarga(){
+        return DB::SELECT("SELECT r.fecha,r.hora,r.monto,c.nombre,c.apellido,u.name 
+        from recarga r inner join cliente c on r.cliente_id=c.id inner join users u on r.user_id=u.id");
     }
 
     /**

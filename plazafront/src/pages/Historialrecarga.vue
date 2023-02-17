@@ -9,7 +9,7 @@
       :filter="filter"
     >
     <template v-slot:top-right>
-                          <q-input dense outlined debounce="300" v-model="filter" placeholder="Buscar">
+                          <q-input dense outlined debounce="300" v-model="filter" placeholder="Buscar" >
                 <template v-slot:append>
                   <q-icon name="search" />
                 </template>
@@ -47,17 +47,6 @@
 </template>
 
 <script>
-var $  = require( 'jquery' );
-require( 'datatables.net-buttons/js/buttons.html5.js' )();
-require( 'datatables.net-buttons/js/buttons.print.js' )();
-require('datatables.net-buttons/js/dataTables.buttons');
-require('datatables.net-dt/css/jquery.dataTables.min.css');
-import print from 'datatables.net-buttons/js/buttons.print';
-import jszip from 'jszip/dist/jszip';
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-pdfMake.vfs=pdfFonts.pdfMake.vfs;
-window.JSZip=jszip;
 import xlsx from "json-as-xlsx"
 
 export default {
@@ -114,14 +103,14 @@ xlsx(datacaja, settings) // Will download the excel file
     misdatos(){
       this.$q.loading.show()
       this.filas=[]
-      this.$axios.get(process.env.API+'/recarga').then( res=>{
+      this.$axios.get(process.env.API+'/listRecarga').then( res=>{
         // console.log(res.data);
         let num=0
         res.data.forEach(r => {
           num++
             r.num=num
-            r.usuario=r.user.name
-            r.nombre=r.cliente.nombre +' ' + r.cliente.apellido
+            r.usuario=r.name
+            r.nombre=r.nombre +' ' + r.apellido
             this.filas.push(r)
         });
         this.$q.loading.hide();

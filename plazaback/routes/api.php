@@ -28,6 +28,7 @@ Route::group(['middleware'=>'auth:sanctum'],function (){
     Route::post('/fhistorial',[\App\Http\Controllers\HistorialController::class,'fhistorial']);
     Route::post('/imprimir',[\App\Http\Controllers\HistorialController::class,'imprimir']);
     Route::post('/clienteEstado',[\App\Http\Controllers\ClienteController::class,'clienteEstado']);
+    Route::get('/listRecarga',[\App\Http\Controllers\RecargaController::class,'listRecarga']);
 
     Route::resource('/user',\App\Http\Controllers\UserController::class);
     Route::resource('/cliente',\App\Http\Controllers\ClienteController::class);
