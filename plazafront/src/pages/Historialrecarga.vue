@@ -80,7 +80,7 @@ let datacaja = [
     sheet: "Recargas",
     columns: [
       { label: "No", value: "num" }, // Top level data
-      { label: "Fecha", value: "monto" }, // Top level data
+      { label: "Fecha", value: "fecha" }, // Top level data
       { label: "Hora", value: "hora" }, // Top level data
       { label: "Monto", value: "monto" }, // Top level data
       { label: "Cliente", value: "nombre" }, // Top level data
